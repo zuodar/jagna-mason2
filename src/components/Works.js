@@ -14,29 +14,53 @@ class Works extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      id:0
-
+      id:1 
     };
   }
 
   incrementItem = () => {
-    this.setState({ id: this.state.id + 1 });
+    this.setState({ id: this.state.id + 1 });  
+  };
+  decrementItem = () => {
+    this.setState({ id: this.state.id - 1 });  
   }
 
 	render() {
-    const url = data[this.state.id].thumbnail;
-    const name = data[this.state.id].name;
+    const stateId = this.state.id;
+    const url = data[stateId].thumbnail;
+    const name = data[stateId].name;
+    const nextUrl = data[stateId + 1].thumbnail;
+    const nextName = data[stateId + 1].name;
+    const prevUrl = data[stateId-1].thumbnail;
+    const prevName = data[stateId-1].name; 
 
     return (
 
-	    	<div style={centered}>  
 
-		    	<Work thumbnailUrl={url} workTitle={name} />
-		    	 
-		    	<button onClick={this.incrementItem}> Next </button>
+      <div id="slider" className="jagSwipe" style={centered}>
+          <div className="wrapper">
+              <div id="slides" className="slides">
 
-	     	</div>
+                  <div className="slide jag-prev-post ">
+                      <Work thumbnailUrl={prevUrl} />
+                  </div>
 
+                  <div className="slide content-area ">
+                      <div className="site-main scene_element2 scene_element--fadein2">
+                        <Work thumbnailUrl={url} workTitle={name} />
+                      </div>
+                  </div>
+                  
+                  <div className="slide jag-next-post ">
+                      <Work thumbnailUrl={nextUrl}  />
+                  </div>
+
+
+              </div>
+          </div>
+          <button onClick={this.decrementItem}> Prev </button>
+          <button onClick={this.incrementItem}> Next </button>
+      </div>
 	    )
 	}
 }
