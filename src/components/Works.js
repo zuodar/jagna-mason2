@@ -1,5 +1,4 @@
 import React from 'react';
- 
 import Work from './Work';
 import data from '../data';
 
@@ -32,7 +31,7 @@ class Works extends React.Component {
 
 	    	<div style={centered}>  
 
-		    	<Work tagline={url} more={name} />
+		    	<Work thumbnailUrl={url} workTitle={name} />
 		    	 
 		    	<button onClick={this.incrementItem}> Next </button>
 

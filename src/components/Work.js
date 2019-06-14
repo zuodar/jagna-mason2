@@ -1,7 +1,6 @@
 import React from 'react';
-// import Fish from './Fish';
-import sampleFishes from '../sample-fishes';
-
+import data from '../data';
+ 
 
 const divStyle = {
 	left: '0',
@@ -13,12 +12,7 @@ const divStyle = {
 class Work extends React.Component {
 
 
-    loadSamples() {
-    this.setState({
-      fishes: sampleFishes
-    });
-  }
-
+ 
 
   render() {
     return (
@@ -26,12 +20,12 @@ class Work extends React.Component {
     	<div>   
 
 	    	<div className="" style={divStyle}> 
-	    		{this.props.more} 
+	    		{this.props.workTitle} 
 	    	</div> 
 	    	<div className="jag-image jag-img jag-image1 jag-img-active "> 
 		    	<div className="post-thumbnail">
 			    	<img className="attachment-post-thumbnail size-post-thumbnail wp-post-image"  
-			    	src={this.props.tagline}
+			    	src={this.props.thumbnailUrl}
 			    	/> 
 		    	</div> 
 	    	</div>   
