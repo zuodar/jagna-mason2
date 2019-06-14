@@ -1,5 +1,4 @@
 import React from 'react';
- 
 import Work from './Work';
 import data from '../data';
 
@@ -12,8 +11,6 @@ const centered = {
 var id = 3;
 var url = data[id].thumbnail;
 var name = data[id].name;
-
- 
  
 class Works extends React.Component {
 
@@ -37,7 +34,10 @@ class Works extends React.Component {
 
 	    	<div style={centered}>  
 
-		    	<Work tagline={url} more={name} />
+		{/*    	<Work thumbnailUrl={data[id-1].thumbnail} workTitle={data[id-1].name} />*/}
+		    	<Work thumbnailUrl={data[id].thumbnail} workTitle={data[id].name} />
+		 {/*   	<Work thumbnailUrl={data[id+1].thumbnail} workTitle={data[id+1].name} />*/}
+ 
 		    	 
 		    	<button onClick={this.IncrementItem}> Next </button>
 
