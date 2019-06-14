@@ -9,12 +9,6 @@ const centered = {
 	textAlign: 'center',
 };
 
-var id = 3;
-var url = data[id].thumbnail;
-var name = data[id].name;
-
- 
- 
 class Works extends React.Component {
 
 
@@ -26,20 +20,21 @@ class Works extends React.Component {
     };
   }
 
-  IncrementItem = () => {
+  incrementItem = () => {
     this.setState({ id: this.state.id + 1 });
-    this.setState({ id: this.state.id + 1 });
-    console.log(this.state.id);
   }
 
 	render() {
-	    return (
+    const url = data[this.state.id].thumbnail;
+    const name = data[this.state.id].name;
+
+    return (
 
 	    	<div style={centered}>  
 
 		    	<Work tagline={url} more={name} />
 		    	 
-		    	<button onClick={this.IncrementItem}> Next </button>
+		    	<button onClick={this.incrementItem}> Next </button>
 
 	     	</div>
 
