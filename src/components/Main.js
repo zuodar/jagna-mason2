@@ -46,7 +46,13 @@ const Cell = ({ toggle, href, name, thumbnail, height, description, css, maximiz
 )
 
 class App extends Component {
-  state = { columns: 5, margin: 40, categoryList: [], height: true }
+  state = { 
+    columns: 5, 
+    margin: 40, 
+    categoryList: [], 
+    height: true 
+  }
+  
   shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
 
   toggleFilter = (category) =>

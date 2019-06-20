@@ -1,5 +1,5 @@
-import React from 'react';
-import data from '../data';
+import React, { Component } from 'react';
+// import Drawer from './Drawer';
  
 const divStyle = {
 	left: '0',
@@ -7,28 +7,50 @@ const divStyle = {
 	fontSize: '24px'
 };
 
-class Work extends React.Component {
+const Work = ( props ) => {
 
-render() {
-    return (
+	let description = null;
+	if ( props.showInfo ) {
+        description  = (
+ 	   		<div className="jag-project-description jag-project-description__open">
+	    		{ props.description }
+			</div>
+		);
+  	}
 
-    	<div>   
+  	console.log( 'props.infoActive', props.infoActive )
 
-            <div className="jag-single-title">
-                {this.props.workTitle}  
-            </div>
+	return (
+    	<div>
+
+	    	<div className="jag-info-btn2"> 	
+				<div
+					className="jag-info-btn__txt2"
+					onClick={ props.showInfoDrawer }> Info </div> 				
+			</div>
+
+ 			<div className="jag-single-title">
+           		 { props.workTitle}  
+        	</div> 
+
 	    	<div className="jag-image jag-img jag-image1 jag-img-active "> 
 		    	<div className="post-thumbnail">
 			    	<img className="attachment-post-thumbnail size-post-thumbnail wp-post-image"  
-			    	src={this.props.thumbnailUrl}
+			    	src={ props.thumbnailUrl}
 			    	/> 
 		    	</div> 
-	    	</div>   
+	    	</div>
+
+			<div>
+				{description }
+			</div>
+
+
+
 
     	</div>
-
-    )
-  }
+	)
 }
+
 
 export default Work;

@@ -9,7 +9,7 @@ export default [
   },
   {
     name: 'Mazowiecki',
-    description: '#f5f7fa → #c3cfe2',
+    description: 'Tadeusz Mazowiecki i (ur. 18 kwietnia 1927 w Płocku, zm. 28 października 2013 w Warszawie) – polski polityk i publicysta. Ostatni prezes Rady Ministrów PRL i pierwszy III Rzeczypospolitej (w latach 1989–1991). ',
     height: 300,
     thumbnail: 'http://rawsaw.co/jagna1984/wp-content/uploads/2019/02/jagna-03.jpg',
     category: ['paintings']
