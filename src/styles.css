@@ -137,9 +137,15 @@ body,
 .header {
   padding: 30px 70px 30px 70px;
   height: auto;
+  display: -ms-flexbox;
   display: flex;
+  -ms-flex-align: center;
   align-items: center;
   overflow: hidden;
+
+  position: fixed;
+  z-index: 9999999;
+
 }
 
 .grid {
@@ -1520,12 +1526,7 @@ big {
 .wpupg-filter-item:first-of-type {
   display: none; }
 
-.wpupg-filter {
-  opacity: 0;
-  -webkit-transition: all .3s;
-  -moz-transition: all .3s;
-  -o-transition: all .3s;
-  transition: all .3s; }
+ 
 
 .visible {
   opacity: 1; }

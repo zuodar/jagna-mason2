@@ -13,12 +13,11 @@ const centered = {
 class Works extends Component {
 
 
-  state = { 
+  state = {  
     id:0,
     infoActive: false,
     appearHome: true,
-    right: true,
-    dataJson2: null
+    right: true 
   }
 
   toggleInfoDrawer = () => {

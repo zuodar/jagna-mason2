@@ -15,7 +15,7 @@ const useFetch = url => {
   return data;
 };
 
-const Loading = ()=> <div style={{fontSize:50}}>Loading...</div>
+const Loading = ()=> <div style={{fontSize:24,textAlign:'center',marginTop:'12px'}}>Loading...</div>
 
 export default ({url, component})=> {
   const data = useFetch(url);

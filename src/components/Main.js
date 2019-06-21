@@ -4,11 +4,12 @@ import React, { Component } from 'react'
 import lodash from 'lodash'
 import { Icon } from 'antd' 
 import data from '../data'
+// import dataJson from '../data.json';
 import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
 
 
-const Cell = ({ toggle, href, name, thumbnail, height, description, css, maximized }) => (
+const Cell = ({ ID, toggle, href, post_title, thumbnail, height, description, css, maximized }) => (
   <a href={href}>
     <div
       className="cell"
@@ -22,12 +23,12 @@ const Cell = ({ toggle, href, name, thumbnail, height, description, css, maximiz
             <div className="close">
               <Icon type="close" style={{ cursor: 'pointer' }} onClick={toggle} />
             </div>
-            <h1>{name}</h1>
+            <h1>{post_title}</h1>
             <p>{description}</p>
           </Slug>
         </div>
       </Fade>
-
+ 
 
 
       <Fade
@@ -37,7 +38,7 @@ const Cell = ({ toggle, href, name, thumbnail, height, description, css, maximiz
         leave={{ opacity: 0, transform: 'translate3d(0,-50px,0)' }}
         delay={maximized ? 0 : 400}>
 
-        <div className="default"> {name} </div>
+        <div className="default"> {post_title} </div>
         <img className="thumbnail" src={thumbnail} />
 
       </Fade>
@@ -92,7 +93,7 @@ class App extends Component {
           // Arbitrary data, should contain keys, possibly heights, etc.
           data={filteredWorks}
           // Key accessor, instructs grid on how to fet individual keys from the data set
-          keys={d => d.name}
+          keys={d => d.ID}
           // Can be a fixed value or an individual data accessor
           heights={this.state.height ? d => d.height : 200}
           //heights={d => d.height} 
