@@ -10,16 +10,14 @@ const divStyle = {
 
 const Work = ( props ) => {
 
-	let description = null;
-	if ( props.showInfo ) {
-        description  = (
- 	   		<div className="jag-project-description jag-project-description__open">
-	    		{ props.description }
-			</div>
-		);
-  	}
 
-  	console.log( 'props.infoActive', props.infoActive )
+
+	let  slideClass = null;
+	if ( props.right == true ) { 
+         slideClass  = ("slideright");
+  	} else   { 
+         slideClass  = ("slideleft");
+  	}
 
 	return (
 
@@ -28,22 +26,28 @@ const Work = ( props ) => {
                 <CSSTransition
                     key={ props.postID }
                     timeout={ 1000 }
-                    classNames="slide" >
+                    classNames={ slideClass } >
 
-			    	<div className="card"> 
-				    	<div className="jag-info-btn2"> 	
-						{/* <div className="jag-info-btn__txt2"
-							 onClick={ props.showInfoDrawer }> Info </div> 	*/}	
-						</div>
+			    	<div className="card duppa"> 
+
 			 			<div className="jag-single-title"> { props.postTitle} </div> 
-				    	<div className="jag-image jag-img jag-image1 jag-img-active "> 
+
+				    	<div className="jag-image jag-img jag-image1 jag-img-active  "> 
 					    	<div className="post-thumbnail">
 						    	<img className="attachment-post-thumbnail size-post-thumbnail wp-post-image"  
-						    	src={ props.thumbnailUrl}
+						    	src={ props.cst_feat_img}
 						    	/> 
 					    	</div> 
 				    	</div>
-						<div> {description } </div>
+ 
+
+				    	<div className="jag-image jag-img jag-image3 jag-img-active"> 
+								<img src="http://rawsaw.co/jagna1984/wp-content/uploads/2019/02/UN-09.jpg" />
+						</div>
+
+
+
+
 			    	</div>
 
 

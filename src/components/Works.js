@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import Work from './Work';
-//import dataJson from '../data.json';
+import Drawer from './Drawer';
+import dataJson from '../data.json';
 import { CSSTransition } from "react-transition-group";
 
 const centered = {
@@ -10,31 +11,58 @@ const centered = {
 };
 
 class Works extends Component {
-  state = {
+
+
+  state = { 
     id:0,
     infoActive: false,
     appearHome: true,
-  //  dataJson:  "http://rawsaw.co/jagna1984/wp-json/sections/v1/post",
-    dataJson: null
+    right: true,
+    dataJson2: null
   }
 
-  componentDidMount() { 
+/*  componentDidMount() { 
+    console.log( 'this.state.dataJson2:', this.state.dataJson2 );   
     fetch('http://rawsaw.co/jagna1984/wp-json/sections/v1/post')
       .then(( res ) => res.json())
-      .then(( dataJson ) => {
-      this.setState({ dataJson: dataJson })  
-      console.log( 'dataJson:', dataJson );
+      .then(( dataJson2 ) => {
+      this.setState({ dataJson2: dataJson2 })  
+      console.log( 'this.state.dataJson2:', this.state.dataJson2 );
     })
+  }*/
+
+  toggleInfoDrawer = () => {
+    this.setState({
+      infoActive: !this.state.infoActive,
+    }) 
+  }
+
+  showInfoDrawer = () => {
+    this.setState({
+      infoActive: false,
+    }) 
+  }
+
+  left = () => {
+    this.setState({
+      right: false,
+    }) 
+  } 
+
+  right = () => {
+    this.setState({
+      right: true,
+    }) 
   }
 
   toggleAppear = () => {
     this.setState({
-      appearHome: !this.state.appearHome
-    })
+      appearHome: !this.state.appearHome,
+    }) 
   }
 
   incrementItem = () => {
-      if ( this.state.id + 1 < this.state.dataJson.length) {
+      if ( this.state.id + 1 < dataJson.length) {
         this.setState({ id: this.state.id + 1 });
       } else {
         this.setState({ id: 0 }); 
@@ -42,32 +70,41 @@ class Works extends Component {
   }
 
   decrementItem = () => {
-     console.log('this.state.dataJson:', this.state.dataJson);
+ //    console.log('this.state.dataJs:', this.state.dataJs);
       if ( this.state.id > 0 ) {
         this.setState({ id: this.state.id - 1 });
       } else {
-        this.setState({ id: this.state.dataJson.length - 1 });
+        this.setState({ id: dataJson.length - 1 });
       }    
   }
 
-  showInfoDrawer = () => {
-    const shown = this.state.infoActive;
-    this.setState({ infoActive: !shown })
-    console.log(this.state.infoActive);
+
+  wrapperFunctionPrev = () => {
+    this.showInfoDrawer();
+    () => this.state.toggleAppear();
+    this.decrementItem();
+    this.left(); 
   }
 
+  wrapperFunctionNext = () => {
+    this.showInfoDrawer();
+    () => this.state.toggleAppear();
+    this.incrementItem();
+    this.right(); 
+  }
 
-
+ 
 	render() {
-    if (!this.state.dataJson) { 
-
+ 
       const stateId = this.state.id;
-      const url = this.state.dataJson[stateId].acf.cst_feat_img.sizes.large;
-      const name = this.state.dataJson[stateId].post_title;
-      const ID = this.state.dataJson[stateId].ID;
-      const description = this.state.dataJson[stateId].description;
-      const infoActive = this.state.dataJson[stateId].infoActive;
+      const cst_feat_img = dataJson[stateId].acf.cst_feat_img.sizes.large;
+  //    const alt_feat_img = dataJson[stateId].acf.alt_feat_img.sizes.large;
+      const name = dataJson[stateId].post_title;
+      const ID = dataJson[stateId].ID;
+      const description = dataJson[stateId].acf.project_description;
+      const infoActive = dataJson[stateId].infoActive;
 
+   
       return (
         <div id="slider" className="jagSwipe" style={centered}>
             <div className="wrapper">
@@ -82,12 +119,13 @@ class Works extends Component {
                             timeout={ 350}
                             classNames="fade" >
                             <Work 
-                              thumbnailUrl={url} 
+                              cst_feat_img={cst_feat_img} 
                               postTitle={name} 
-                              postID={ID} 
-                              description={description} 
+                              postID={ID}
+                              right={ this.state.right }  
+                              
                               infoActive={ this.state.infoActive } 
-                              showInfoDrawer={ this.showInfoDrawer } />
+                               />
                           </CSSTransition>
 
                         </div>
@@ -96,17 +134,28 @@ class Works extends Component {
                 </div>
             </div>
 
-            <button 
+
+
+            <Drawer
+              infoActive={ this.state.infoActive }
+              description={ description }
+            /> 
+              
+            <div className="jag-info-btn">   
+                <div className="jag-info-btn__txt"
+                   onClick={ this.toggleInfoDrawer }> Info
+                </div>   
+            </div>
+
+            <button
               className="jag-btn-prev-post" 
-              onClick={ () => this.state.toggleAppear(),
-              this.decrementItem }>
+              onClick= {this.wrapperFunctionPrev} >
               Prev 
             </button>
-            
-            <button 
+
+            <button            
               className="jag-btn-next-post" 
-              onClick={ () => this.state.toggleAppear(),
-              this.incrementItem }>
+              onClick= {this.wrapperFunctionNext} >
               Next 
             </button>
 
@@ -114,7 +163,7 @@ class Works extends Component {
         </div>
   	    )
   	}
-  }
+ 
 }
 
 

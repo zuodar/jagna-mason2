@@ -2,23 +2,21 @@ import React, { Component } from 'react';
 
 const Drawer = ( props ) => {
 
-	let description = null;
-	if ( props.showInfo == true ) {
-        description  = (
- 	   		<div className="jag-project-description jag-project-description__open">
-	    		{ props.description }
-			</div>
-		);
+	let  drawerClass = null;
+	if ( props.infoActive == true ) { 
+         drawerClass  = ("jag-project-description jag-project-description__open");
+  	} else if ( props.infoActive == false ) { 
+         drawerClass  = ("jag-project-description");
   	}
 
-  	console.log( 'props.showInfo', props.showInfo )
-
 	return (
-		<div>
-			{description }
+
+		<div>  
+	    	<div className={drawerClass}>
+	    		{ props.description }
+	    	</div>		
 		</div>
 	)
 }
-
 
 export default Drawer;

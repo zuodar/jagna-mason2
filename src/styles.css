@@ -1908,6 +1908,7 @@ main,
   opacity: .2; }
 
 .jag-project-description {
+  border-left: 1px solid grey;
   width: 100%;
   max-width: 420px;
   top: 0;
@@ -1958,17 +1959,25 @@ main,
     .jag-gohome__txt {
       display: inline-block; } }
 
+
 .jag-info-btn {
-  z-index: 9999999;
+  z-index: 9999999999999999999;
   position: fixed;
   right: 0px;
+  top: 0;
   cursor: pointer;
   -webkit-transition: all .3s;
   transition: all .3s;
   margin: 5px 4px; }
-  @media (min-width: 600px) {
+
+
+@media (min-width: 600px) {
     .jag-info-btn {
-      margin: 8px; } }
+      margin: 8px; 
+    } 
+
+}
+
 
 .jag-info-btn:hover {
   opacity: .5; }
@@ -2009,7 +2018,7 @@ main,
 .jag-btn-next-post {
   position: fixed;
   bottom: 0;
-  z-index: 9999;
+  z-index: 99999999999999999999;
   cursor: pointer;
   -webkit-transition: all .3s;
   transition: all .3s;
@@ -2245,32 +2254,67 @@ body,
   opacity: 0;
 }
 
+
+
+
+
 /* slide enter */
-.slide-enter {
+.slideright-enter {
   opacity: 0;
-  transform:  translateY(0) translateX(100%) ;
+  transform: translateX(100%) ;
   z-index: 1;
 }
-.slide-enter.slide-enter-active {
+.slideright-enter.slideright-enter-active {
     opacity: 1;
     transform: scale(1) translateY(0);
     transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
 }
 
 /* slide exit */
-.slide-exit {
+.slideright-exit {
     opacity: 1;
     transform: scale(1) translateY(0);
     
 }
-.slide-exit.slide-exit-active {
+.slideright-exit.slideright-exit-active {
     opacity: 0;
-    transform:  translateY(0) translateX(-100%);
+    transform: translateX(-100%);
     transition: opacity 350ms linear, transform 350ms ease-out;
 }
-.slide-exit-done {
+.slideright-exit-done {
   opacity: 0;
 }
+
+
+/* slide enter */
+.slideleft-enter {
+  opacity: 0;
+  transform: translateX(-100%) ;
+  z-index: 1;
+}
+.slideleft-enter.slideleft-enter-active {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
+}
+
+/* slide exit */
+.slideleft-exit {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+    
+}
+.slideleft-exit.slideleft-exit-active {
+    opacity: 0;
+    transform: translateX(100%);
+    transition: opacity 350ms linear, transform 350ms ease-out;
+}
+.slideleft-exit-done {
+  opacity: 0;
+}
+
+
+
 
 /* Card */
 .card-container {
