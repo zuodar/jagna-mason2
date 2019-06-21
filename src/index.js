@@ -11,8 +11,8 @@ import NotFound from './components/NotFound';
 
 const App = () => {
   return (
-    <Router>
-        <Switch>
+    <Router> 
+        <Switch> 
 
           <Route path="/" exact component={Main} />
           <Route path="/works/:id" component={Works} />
