@@ -7,7 +7,7 @@ import { CSSTransition } from "react-transition-group";
 const centered = {
 	left: '0',
 	right: '0',
-	textAlign: 'center',
+	textAlign: 'center', 
 };
 
 class Works extends Component {

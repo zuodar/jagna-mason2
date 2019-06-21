@@ -2259,7 +2259,7 @@ body,
 
 
 /* slide enter */
-.slideright-enter {
+.slideright-enter { 
   opacity: 0;
   transform: translateX(100%) ;
   z-index: 1;

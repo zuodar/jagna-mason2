@@ -20,7 +20,7 @@ const Work = ( props ) => {
   	}
 
 	return (
-
+ 
 
             <TransitionGroup className="card-container">
                 <CSSTransition

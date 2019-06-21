@@ -7,7 +7,7 @@ const Drawer = ( props ) => {
          drawerClass  = ("jag-project-description jag-project-description__open");
   	} else if ( props.infoActive == false ) { 
          drawerClass  = ("jag-project-description");
-  	}
+  	} 
 
 	return (
 
