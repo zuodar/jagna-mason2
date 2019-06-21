@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Work from './Work';
 import Drawer from './Drawer';
-import dataJson from '../data.json';
+// import dataJson from '../data.json';
 import { CSSTransition } from "react-transition-group";
 
 const centered = {
@@ -21,7 +21,7 @@ class Works extends Component {
     dataJson2: null
   }
 
-/*  componentDidMount() { 
+   componentDidMount() { 
     console.log( 'this.state.dataJson2:', this.state.dataJson2 );   
     fetch('http://rawsaw.co/jagna1984/wp-json/sections/v1/post')
       .then(( res ) => res.json())
@@ -29,7 +29,7 @@ class Works extends Component {
       this.setState({ dataJson2: dataJson2 })  
       console.log( 'this.state.dataJson2:', this.state.dataJson2 );
     })
-  }*/
+  } 
 
   toggleInfoDrawer = () => {
     this.setState({
@@ -62,7 +62,7 @@ class Works extends Component {
   }
 
   incrementItem = () => {
-      if ( this.state.id + 1 < dataJson.length) {
+      if ( this.state.id + 1 < this.state.dataJson2.length) {
         this.setState({ id: this.state.id + 1 });
       } else {
         this.setState({ id: 0 }); 
@@ -74,7 +74,7 @@ class Works extends Component {
       if ( this.state.id > 0 ) {
         this.setState({ id: this.state.id - 1 });
       } else {
-        this.setState({ id: dataJson.length - 1 });
+        this.setState({ id: this.state.dataJson2.length - 1 });
       }    
   }
 
@@ -97,12 +97,12 @@ class Works extends Component {
 	render() {
  
       const stateId = this.state.id;
-      const cst_feat_img = dataJson[stateId].acf.cst_feat_img.sizes.large;
-  //    const alt_feat_img = dataJson[stateId].acf.alt_feat_img.sizes.large;
-      const name = dataJson[stateId].post_title;
-      const ID = dataJson[stateId].ID;
-      const description = dataJson[stateId].acf.project_description;
-      const infoActive = dataJson[stateId].infoActive;
+      const cst_feat_img = this.state.dataJson2[stateId].acf.cst_feat_img.sizes.large;
+  //    const alt_feat_img = this.state.dataJson2[stateId].acf.alt_feat_img.sizes.large;
+      const name = this.state.dataJson2[stateId].post_title;
+      const ID = this.state.dataJson2[stateId].ID;
+      const description = this.state.dataJson2[stateId].acf.project_description;
+      const infoActive = this.state.dataJson2[stateId].infoActive;
 
    
       return (
