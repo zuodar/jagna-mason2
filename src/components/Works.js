@@ -3,6 +3,7 @@ import Work from './Work';
 import Drawer from './Drawer';
 // import dataJson from '../data.json';
 import { CSSTransition } from "react-transition-group";
+import { withRouter } from "react-router";
 
 const centered = {
 	left: '0',
@@ -12,9 +13,16 @@ const centered = {
 
 class Works extends Component {
 
+  static getDerivedStateFromProps(nextProps, oldState){
+    if(oldState.id === null){
+      return {...oldState, id: nextProps.id}
+    } else {
+      return null;
+    }
+  }
 
   state = {  
-    id:0,
+    id:null,
     infoActive: false,
     appearHome: true,
     right: true 
@@ -52,17 +60,21 @@ class Works extends Component {
 
   incrementItem = () => {
       if ( this.state.id + 1 < this.props.data.length) {
+        this.props.history.push(`/works/${Number.parseInt(this.state.id, 10)+1}/`)
         this.setState({ id: this.state.id + 1 });
       } else {
-        this.setState({ id: 0 }); 
+        this.props.history.push(`/works/0/`)
+        this.setState({ id: 0 });
       }
   }
 
   decrementItem = () => {
  //    console.log('this.state.dataJs:', this.state.dataJs);
       if ( this.state.id > 0 ) {
+        this.props.history.push(`/works/${Number.parseInt(this.state.id, 10)-1}/`)
         this.setState({ id: this.state.id - 1 });
       } else {
+        this.props.history.push(`/works/${Number.parseInt(this.props.data.length)-1}/`)
         this.setState({ id: this.props.data.length - 1 });
       }    
   }
@@ -156,4 +168,4 @@ class Works extends Component {
 }
 
 
-export default Works;
+export default withRouter(Works);

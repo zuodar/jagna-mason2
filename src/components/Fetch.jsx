@@ -17,8 +17,10 @@ const useFetch = url => {
 
 const Loading = ()=> <div style={{fontSize:24,textAlign:'center',marginTop:'12px'}}>Loading...</div>
 
-export default ({url, component})=> {
+export default ({url, component, match})=> {
   const data = useFetch(url);
   const Component = component;
-  return data ? <Component data={data}/> : <Loading/>
+  return data ? <Component data={data} id={match ? match.params.id : null}/> : <Loading/>
 }
+
+

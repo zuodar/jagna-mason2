@@ -9,17 +9,26 @@ import Main from './components/Main';
 import Works from './components/Works';
 import NotFound from './components/NotFound';
 import Fetch from './components/Fetch';
+import Swiper from './components/Swiper';
+import Test from './components/Test';
+import Test2 from './components/Test2';
 
+const url = 'http://rawsaw.co/jagna1984/wp-json/sections/v1/post'
+
+// class App extends Component {
 const App = () => {
   return (
     <Router> 
         <Switch> 
 
-          <Route path="/" exact component={Main} />
+          <Route path="/" exact component={() => <Fetch component={Main} url={url}/>} />
+          <Route path="/test" exact component={Test} />
+          <Route path="/test2" exact component={Test2} />
+          <Route path="/swiper" exact component={Swiper} />
           <Route
             path="/works/:id"
             component={
-              ()=><Fetch component={Works} url='http://rawsaw.co/jagna1984/wp-json/sections/v1/post'/>} />
+              ({match})=><Fetch match={match} component={Works} url={url}/>} />
           <Route component={NotFound} />
 
         </Switch>

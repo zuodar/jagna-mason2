@@ -2268,6 +2268,9 @@ body,
 .slideright-enter.slideright-enter-active {
     opacity: 1;
     transform: scale(1) translateY(0);
+    -webkit-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
+    -moz-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
+    -o-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
     transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
 }
 
@@ -2280,6 +2283,9 @@ body,
 .slideright-exit.slideright-exit-active {
     opacity: 0;
     transform: translateX(-100%);
+    -webkit-transition: opacity 350ms linear, transform 350ms ease-out;
+    -moz-transition: opacity 350ms linear, transform 350ms ease-out;
+    -o-transition: opacity 350ms linear, transform 350ms ease-out;
     transition: opacity 350ms linear, transform 350ms ease-out;
 }
 .slideright-exit-done {
@@ -2296,6 +2302,9 @@ body,
 .slideleft-enter.slideleft-enter-active {
     opacity: 1;
     transform: scale(1) translateY(0);
+    -webkit-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
+    -moz-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
+    -o-transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
     transition: opacity 250ms linear 250ms, transform 350ms ease-in-out 250ms;
 }
 
@@ -2308,6 +2317,9 @@ body,
 .slideleft-exit.slideleft-exit-active {
     opacity: 0;
     transform: translateX(100%);
+    -webkit-transition: opacity 350ms linear, transform 350ms ease-out;
+    -moz-transition: opacity 350ms linear, transform 350ms ease-out;
+    -o-transition: opacity 350ms linear, transform 350ms ease-out;
     transition: opacity 350ms linear, transform 350ms ease-out;
 }
 .slideleft-exit-done {

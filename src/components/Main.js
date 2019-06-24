@@ -3,14 +3,16 @@ import '../styles.css'
 import React, { Component } from 'react'
 import lodash from 'lodash'
 import { Icon } from 'antd' 
-import data from '../data'
+//import data from '../data.json'
 // import dataJson from '../data.json';
 import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
 
+//acf.cst_feat_img.sizes.large
 
-const Cell = ({ ID, toggle, href, post_title, thumbnail, height, description, css, maximized }) => (
-  <a href={href}>
+const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, maximized }) => (
+
+
     <div
       className="cell"
       style={{ backgroundImage: css, cursor: !maximized ? 'pointer' : 'auto' }}
@@ -24,12 +26,12 @@ const Cell = ({ ID, toggle, href, post_title, thumbnail, height, description, cs
               <Icon type="close" style={{ cursor: 'pointer' }} onClick={toggle} />
             </div>
             <h1>{post_title}</h1>
-            <p>{description}</p>
+            <p>{project_description}</p>
           </Slug>
         </div>
       </Fade>
  
-
+ 
 
       <Fade
         show={!maximized}
@@ -39,26 +41,26 @@ const Cell = ({ ID, toggle, href, post_title, thumbnail, height, description, cs
         delay={maximized ? 0 : 400}>
 
         <div className="default"> {post_title} </div>
-        <img className="thumbnail" src={thumbnail} />
+        <img src={ thumbnail } />
 
       </Fade>
     </div>
-  </a>
+  
 )
 
 class App extends Component {
+
   state = { 
     columns: 5, 
     margin: 40, 
-    categoryList: [], 
-    height: true 
+    categoryList: []
   }
   
-  shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
+  //shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
 
   toggleFilter = (category) =>
     () => {
-      if (this.state.categoryList.includes(category)) {
+      if (this.state.categoryList.includes( category)) {
         this.setState({ categoryList: this.state.categoryList.filter(c => c !== category) })
       } else {
         this.setState({ categoryList: [...this.state.categoryList, category] })
@@ -69,13 +71,15 @@ class App extends Component {
   setMargin = e => this.setState({ margin: parseInt(e.key) })
 
   render() {
+    const { data } = this.props;
     const filteredWorks = data.filter(
       item => (this.state.categoryList.length > 0)
         ? this.state.categoryList.filter(c => item.category.includes(c)).length
         : true
     )
 
-    console.log(this.state.categoryList)
+  //  console.log(this.state.categoryList)
+
     return (
 
       <div className="main">
@@ -95,7 +99,9 @@ class App extends Component {
           // Key accessor, instructs grid on how to fet individual keys from the data set
           keys={d => d.ID}
           // Can be a fixed value or an individual data accessor
-          heights={this.state.height ? d => d.height : 200}
+          heights={this.state.height ? d => d.height : 300} 
+          ////  heights={ d => d.acf.cst_feat_img.height} 
+
           //heights={d => d.height} 
           // Number of columns
           columns={this.state.columns}
@@ -106,7 +112,7 @@ class App extends Component {
           // Delay when active elements (blown up) are minimized again
           closeDelay={400}>
           {(data, maximized, toggle) => (
-            <Cell {...data} maximized={maximized} toggle={toggle} />
+            <Cell {...data} thumbnail={data.acf.cst_feat_img.sizes.large} maximized={maximized} toggle={toggle} />
           )}
         </Grid>
       </div>

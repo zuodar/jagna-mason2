@@ -10,12 +10,15 @@
     "gh-pages": "^2.0.1",
     "lodash": "4.17.10",
     "mauerwerk": "2.0.0",
+    "object-assign": "^4.1.1",
     "react": "16.8",
     "react-dom": "16.8",
+    "react-id-swiper": "^2.1.2",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "1.1.4",
-    "react-transition-group": "^4.1.1"
+    "react-transition-group": "^4.1.1",
+    "swiper": "^4.5.0"
   },
   "devDependencies": {},
   "scripts": {
