@@ -1,24 +1,30 @@
 import React from 'react'
 import { Button } from 'antd'
 
-const allCategories = ['paintings', 'animals', 'exhibitions'];
+//const allCategories = ['paintings', 'animals', 'exhibitions'];
 
-export default ({toggleFilter, categoryList}) =>
+const buttons = [];
+
+export default ({toggleFilter, categoryList}) => {
   
-  <div className="header">
+  categoryList.forEach(c => {
+    buttons.push(<Button
+          key={c}
+          style={{marginLeft:10}}
+          >
+          {c.toUpperCase()}
+        </Button>)
+  })
+
+  return (<div className="header">
   
     <div className="jag-main-logo"> Jagna Wróblewska </div> 
     <div className="wpupg-filter">
-      {allCategories.map(
-        c => <Button
-          key={c}
-          style={{marginLeft:10}}
-          type={categoryList.includes(c) ? "primary" : "secondary"}
-                     onClick={toggleFilter(c )}>
-          {c.toUpperCase()}
-        </Button>
-      )}
+   {/* {buttons}*/}
     </div>
 
-  </div>
-
+  </div>)
+}
+/*
+type={categoryList.includes(c) ? "primary" : "secondary"}
+                     onClick={toggleFilter(c )}*/

@@ -14,9 +14,12 @@
     "react": "16.8",
     "react-dom": "16.8",
     "react-id-swiper": "^2.1.2",
+    "react-resize-detector": "^4.2.0",
+    "react-responsive": "^7.0.0",
     "react-router": "^5.0.1",
     "react-router-dom": "^5.0.1",
     "react-scripts": "1.1.4",
+    "react-swipeable-routes": "^0.6.0",
     "react-transition-group": "^4.1.1",
     "swiper": "^4.5.0"
   },

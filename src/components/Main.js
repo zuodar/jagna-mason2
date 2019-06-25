@@ -1,12 +1,17 @@
 import 'antd/dist/antd.css'
 import '../styles.css'
-import React, { Component } from 'react'
+import React, { PureComponent  } from 'react'
+import { render } from 'react-dom';
 import lodash from 'lodash'
 import { Icon } from 'antd' 
 //import data from '../data.json'
 // import dataJson from '../data.json';
 import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
+import ReactResizeDetector from 'react-resize-detector';
+
+ 
+
 
 //acf.cst_feat_img.sizes.large
 
@@ -48,12 +53,54 @@ const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, ma
   
 )
 
-class App extends Component {
 
-  state = { 
+
+class App extends PureComponent  {
+
+  categoryList = []
+
+  state = {  
     columns: 5, 
-    margin: 40, 
-    categoryList: []
+    margin: 40,
+    szer: 0,
+    responsiveFactor: 100,
+  } 
+
+
+ 
+  modifyColumns = () => {  
+    if (this.state.szer > 1400 ) {
+      this.setState({ columns: 5 });
+      this.setState({ responsiveFactor: (this.state.szer - 240)/5 });
+    } else if (this.state.szer > 1100 && this.state.szer <= 1400) {
+      this.setState({ columns: 4 });
+      this.setState({ responsiveFactor: (this.state.szer - 200)/4 });  
+    } else if (this.state.szer > 800 && this.state.szer <= 1100) {
+      this.setState({ columns: 3 });
+      this.setState({ responsiveFactor: (this.state.szer - 160)/3 });
+    } else if (this.state.szer > 400 && this.state.szer <= 800) {
+      this.setState({ columns: 2 });
+      this.setState({ responsiveFactor: (this.state.szer - 120)/2 });
+    } else if (this.state.szer > 1 && this.state.szer <= 400) {
+      this.setState({ columns: this.state.columns = 1 });
+      this.setState({ responsiveFactor: (this.state.szer - 80)  }); 
+    }  
+  }
+
+
+  /*  componentDidMount(){
+    this.modifyColumns()
+  }*/
+
+  componentWillMount(){
+    this.categoryList = this.props.data.reduce((sum, current) => {
+        if(current.acf.category) {
+          current.acf.category.forEach(cat => {
+            sum.add(cat)
+          })
+        }
+      return sum;
+    }, new Set())
   }
   
   //shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
@@ -70,21 +117,29 @@ class App extends Component {
   setColumns = e => this.setState({ columns: parseInt(e.key) })
   setMargin = e => this.setState({ margin: parseInt(e.key) })
 
+
+
   render() {
     const { data } = this.props;
-    const filteredWorks = data.filter(
+    const filteredWorks = data/*.filter(
       item => (this.state.categoryList.length > 0)
         ? this.state.categoryList.filter(c => item.category.includes(c)).length
         : true
-    )
+    )*/
+ 
+ 
+  // console.log(this.state.categoryList)
+  // console.log( 'data.acf.cst_feat_img.height', this.props.data[0].acf.cst_feat_img.sizes["large-height"] ) 
+  
 
-  //  console.log(this.state.categoryList)
-
-    return (
+    return ( 
 
       <div className="main">
+
+
         <Header
           {...this.state}
+          categoryList={this.categoryList}
           search={this.search}
           shuffle={this.shuffle}
           toggleFilter={this.toggleFilter}
@@ -92,15 +147,28 @@ class App extends Component {
           setMargin={this.setMargin}
         />
 
+        <ReactResizeDetector 
+          handleWidth
+          render={({ width }) => (
+            <div>
+              { this.setState({ szer: width }) }
+              { this.modifyColumns() }
+            </div>
+
+          )}
+        />
+
+
         <Grid
           className="grid"
           // Arbitrary data, should contain keys, possibly heights, etc.
           data={filteredWorks}
           // Key accessor, instructs grid on how to fet individual keys from the data set
-          keys={d => d.ID}
+          keys={ d => d.ID }
           // Can be a fixed value or an individual data accessor
-          heights={this.state.height ? d => d.height : 300} 
-          ////  heights={ d => d.acf.cst_feat_img.height} 
+          // heights={this.state.height ? d => d.height : 300} 
+          heights={ d => (d.acf.cst_feat_img.sizes["large-height"])/(d.acf.cst_feat_img.sizes["large-width"])*this.state.responsiveFactor } 
+          // Keep image proportions 
 
           //heights={d => d.height} 
           // Number of columns
@@ -112,13 +180,20 @@ class App extends Component {
           // Delay when active elements (blown up) are minimized again
           closeDelay={400}>
           {(data, maximized, toggle) => (
-            <Cell {...data} thumbnail={data.acf.cst_feat_img.sizes.large} maximized={maximized} toggle={toggle} />
+            <Cell {...data} thumbnail={ data.acf.cst_feat_img.sizes.large } maximized={maximized} toggle={toggle} />
           )}
         </Grid>
+
+
+
       </div>
     )
   }
 }
 
 export default App;
+
+
+
+
 
