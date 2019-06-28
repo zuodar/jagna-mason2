@@ -11,6 +11,7 @@ export default ({toggleFilter, categoryList}) => {
     buttons.push(<Button
           key={c}
           style={{marginLeft:10}}
+          onClick={toggleFilter(c )} 
           >
           {c.toUpperCase()}
         </Button>)
@@ -20,11 +21,10 @@ export default ({toggleFilter, categoryList}) => {
   
     <div className="jag-main-logo"> Jagna Wróblewska </div> 
     <div className="wpupg-filter">
-   {/* {buttons}*/}
-    </div>
+{/*      {buttons}  */}
 
+  </div>
   </div>)
 }
 /*
-type={categoryList.includes(c) ? "primary" : "secondary"}
-                     onClick={toggleFilter(c )}*/
+type={categoryList.includes(c) ? "primary" : "secondary"} */

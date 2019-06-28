@@ -18,39 +18,15 @@ body,
     helvetica neue, helvetica, ubuntu, roboto, noto, segoe ui, arial, sans-serif;
 }
 
-.cell {
-  position: relative;
-  background-size: cover;
-  width: 100%;
-  height: 100%;
-  overflow: hidden;
-  color: #777777;
-  text-transform: uppercase;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-/*   box-shadow: 0px 10px 60px -10px rgba(0, 0, 0, 0.2); */
-  transition: box-shadow 0.5s;
-  font-size: 10px;
-  line-height: 10px;
-  border: 1px solid red; 
+.default:hover { 
+  opacity: 1.0 !important;
+
 }
 
-.default {
-  position: absolute;
-  width: 100%;
-  height: 100%;
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-  padding: 20px;
-  font-size: 24px;
+.grid > div > div:hover { 
+  z-index: 99999 !important;
 }
-
-.cell:hover {
-/*   box-shadow: 0px 20px 60px -10px rgba(0, 0, 0, 0.3); */
-}
-
+ 
 .shuffle {
   position: absolute;
   top: 40px;
@@ -1243,7 +1219,7 @@ object {
 
 html {
   overflow-x: hidden;
-  overflow-y: scroll;
+  overflow-y: hidden; 
   line-height: 1.15;
   -ms-text-size-adjust: 100%;
   -webkit-text-size-adjust: 100%;
@@ -1530,21 +1506,26 @@ big {
  
 
 .visible {
-  opacity: 1; }
+  opacity: 1;
+ }
 
 .wpupg-filter-item {
-  margin: 0 16px !important; }
+  margin: 0 16px !important;
+ }
 
 .wpupg-filter .jag-contact-btn {
   display: inline-block;
-  margin: 0 16px; }
+  margin: 0 16px;
+ }
 
 .wpupg-filter .jag-contact-btn a {
-  color: inherit; }
+  color: inherit;
+ }
 
 #main > .jag-contact-btn {
   height: 0;
-  visibility: hidden; }
+  visibility: hidden;
+ }
 
 .wpupg-grid {
   overflow-x: hidden;
@@ -1552,49 +1533,30 @@ big {
   opacity: 0;
   -webkit-transition: all .6s;
   transition: all .6s;
-  margin-top: 50px; }
+  margin-top: 50px;
+ }
   @media (min-width: 600px) {
     .wpupg-grid {
-      margin-top: 70px; } }
+      margin-top: 70px;
+     }
+ }
 
 .wpupg-item {
   margin: 0 !important;
   border: none !important;
   border-width: 0 !important;
   width: 100% !important;
-  max-width: 400px !important; }
+  max-width: 400px !important;
+ }
 
 .wpupg-rows {
-  margin: 40px !important; }
+  margin: 40px !important;
+ }
 
-@media screen and (min-width: 310px) {
-  .wpupg-item {
-    width: 50% !important; }
-  .wpupg-rows {
-    margin: 40px !important; } }
-
-@media screen and (min-width: 550px) {
-  .wpupg-item {
-    width: 33.33333333% !important; } }
-
-@media screen and (min-width: 900px) {
-  .wpupg-item {
-    width: 25% !important; } }
-
-@media screen and (min-width: 1200px) {
-  .wpupg-item {
-    width: 20% !important; }
-  .wpupg-rows {
-    margin: 50px !important; } }
-
-@media screen and (min-width: 1600px) {
-  .wpupg-item {
-    width: 16.6666666666667% !important; }
-  .wpupg-rows {
-    margin: 60px !important; } }
 
 .wpupg-post-image {
-  width: 100% !important; }
+  width: 100% !important;
+ }
 
 .wpupg-rows-row:last-of-type {
   position: absolute !important;
@@ -1612,25 +1574,34 @@ big {
   right: 0;
   mix-blend-mode: darken;
   opacity: 0.0 !important;
-  font-size: 66px; }
+  font-size: 66px;
+ }
   @media (min-width: 600px) {
     .wpupg-rows-row:last-of-type {
-      font-size: 78px; } }
+      font-size: 78px;
+     }
+     }
 
 .wpupg-rows-row:last-of-type span {
   font-weight: normal !important;
   width: 300%;
   position: absolute !important;
-  line-height: 0px; }
+  line-height: 0px;
+ }
 
 .wpupg-grid a:hover,
 .wpupg-grid a:focus,
 .wpupg-grid a:active {
-  color: #EF0000; }
+  color: #EF0000;
+ }
 
 a:hover .wpupg-rows-row:last-of-type {
   opacity: 1.0 !important;
-  z-index: 99 !important; }
+  z-index: 99 !important;
+ }
+
+
+
 
 .visible {
   opacity: 1; }
@@ -2192,16 +2163,19 @@ body,
 
 
 
+/* 
 
+#root > div,
+#root > div > div 
+#root > div > div > div
+#root > div > div > div > div
+#root > div > div > div > div > div
+#root > div > div > div > div > div > div
+#root > div > div > div > div > div > div > div {
+    height: 100% !important;
+}
 
-
-
-
-
-
-
-
-
+ */
 
 body,
 #root,

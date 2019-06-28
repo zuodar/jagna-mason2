@@ -28,7 +28,7 @@ const Work = ( props ) => {
                     timeout={ 1000 }
                     classNames={ slideClass } >
 
-			    	<div className="card duppa"> 
+			    	<div className="card "> 
 
 			 			<div className="jag-single-title"> { props.postTitle} </div> 
 
@@ -41,9 +41,6 @@ const Work = ( props ) => {
 				    	</div>
  
 
-				    	<div className="jag-image jag-img jag-image3 jag-img-active"> 
-								<img src="http://rawsaw.co/jagna1984/wp-content/uploads/2019/02/UN-09.jpg" />
-						</div>
 
 
 

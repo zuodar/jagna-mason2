@@ -23,7 +23,11 @@ const App = () => {
     <Router> 
         <Switch> 
 
-          <Route path="/main" exact component={() => <Fetch component={Main} url={jsonUrl}/>} /> 
+          <Route path="/main" exact component={() => <Fetch component={Main} url={jsonUrl}/>} />
+
+          {/*<Fetch url={ jsonUrl } component={() => <Route path="/main" exact component={Main} /> } /> */}
+          {/*<Route path="/main" exact component={() => <Fetch component={Main} url={jsonUrl}/>} /> */}
+
           <Route path="/" exact component={() => <Fetch component={Swipeable} url={ jsonUrl }/>} />
           <Route path="/test" exact component={Test} />
           <Route path="/test2" exact component={Test2} />

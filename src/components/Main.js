@@ -1,16 +1,59 @@
-import 'antd/dist/antd.css'
-import '../styles.css'
+import Radium from 'radium';
 import React, { PureComponent  } from 'react'
 import { render } from 'react-dom';
+import 'antd/dist/antd.css'
+import '../styles.css'
 import lodash from 'lodash'
 import { Icon } from 'antd' 
-//import data from '../data.json'
-// import dataJson from '../data.json';
 import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
 import ReactResizeDetector from 'react-resize-detector';
 
  
+const cellStyle = {
+  position: 'relative',
+  backgroundSize: 'cover',
+  width: '100%',
+  height: '100%',
+  overflow: 'hidden',
+  color: '#777777',
+  textTransform: 'uppercase',
+  display: 'flex',
+  alignItems: 'center',
+  justifycontent: 'center',
+  transition: 'box-shadow 0.5s',
+  fontSize: '10px',
+  lineHeight: '10px',
+  border: '1px solid red', 
+}
+
+const defaultstyle = {
+  position: 'absolute',
+  width: '100%',
+  height: '100%',
+  display: 'flex',
+  alignItems: 'flex-end',
+  justifyContent: 'center',
+  textAlign: 'center',
+  fontFamily: 'jagnas',
+  textTransform: 'uppercase',
+  letterSpacing: '-2.5px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
+  marginTop: '0px',
+  top: '0%',
+  left: '0%', 
+  bottom: '0',
+  right: '0',
+  mixBlendMode: 'darken',
+  fontSize: '66px',
+  lineHeight: '66px',
+  color: '#EF0000',
+  opacity: '0.0',
+  whiteSpace: 'nowrap',
+ 
+ }
 
 
 //acf.cst_feat_img.sizes.large
@@ -45,13 +88,14 @@ const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, ma
         leave={{ opacity: 0, transform: 'translate3d(0,-50px,0)' }}
         delay={maximized ? 0 : 400}>
 
-        <div className="default"> {post_title} </div>
+        <div className="default" style={defaultstyle} > {post_title} </div>
         <img src={ thumbnail } />
 
       </Fade>
     </div>
   
 )
+
 
 
 
@@ -67,25 +111,30 @@ class App extends PureComponent  {
   } 
 
 
- 
+  
   modifyColumns = () => {  
+    let newColumns = 5;
     if (this.state.szer > 1400 ) {
-      this.setState({ columns: 5 });
-      this.setState({ responsiveFactor: (this.state.szer - 240)/5 });
+      newColumns = 5;
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
     } else if (this.state.szer > 1100 && this.state.szer <= 1400) {
-      this.setState({ columns: 4 });
-      this.setState({ responsiveFactor: (this.state.szer - 200)/4 });  
+      newColumns = 4; 
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
     } else if (this.state.szer > 800 && this.state.szer <= 1100) {
-      this.setState({ columns: 3 });
-      this.setState({ responsiveFactor: (this.state.szer - 160)/3 });
+      newColumns = 3;
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
     } else if (this.state.szer > 400 && this.state.szer <= 800) {
-      this.setState({ columns: 2 });
-      this.setState({ responsiveFactor: (this.state.szer - 120)/2 });
+      newColumns = 2;
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
     } else if (this.state.szer > 1 && this.state.szer <= 400) {
-      this.setState({ columns: this.state.columns = 1 });
-      this.setState({ responsiveFactor: (this.state.szer - 80)  }); 
+      newColumns = 1;
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
     }  
+      this.setState({ columns: newColumns });
   }
+
+
+
 
 
   /*  componentDidMount(){
@@ -136,17 +185,6 @@ class App extends PureComponent  {
 
       <div className="main">
 
-
-        <Header
-          {...this.state}
-          categoryList={this.categoryList}
-          search={this.search}
-          shuffle={this.shuffle}
-          toggleFilter={this.toggleFilter}
-          setColumns={this.setColumns}
-          setMargin={this.setMargin}
-        />
-
         <ReactResizeDetector 
           handleWidth
           render={({ width }) => (
@@ -154,10 +192,14 @@ class App extends PureComponent  {
               { this.setState({ szer: width }) }
               { this.modifyColumns() }
             </div>
-
           )}
         />
 
+        <Header
+          {...this.state}
+          categoryList={this.categoryList}
+          toggleFilter={this.toggleFilter}
+        />
 
         <Grid
           className="grid"
@@ -167,10 +209,10 @@ class App extends PureComponent  {
           keys={ d => d.ID }
           // Can be a fixed value or an individual data accessor
           // heights={this.state.height ? d => d.height : 300} 
+          //heights={d => d.height} 
           heights={ d => (d.acf.cst_feat_img.sizes["large-height"])/(d.acf.cst_feat_img.sizes["large-width"])*this.state.responsiveFactor } 
           // Keep image proportions 
 
-          //heights={d => d.height} 
           // Number of columns
           columns={this.state.columns}
           // Space between elements
