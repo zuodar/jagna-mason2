@@ -20,48 +20,48 @@ const styleWork = {
 
 class App extends Component {
 
-  state = {  
+  state = {
     id:0,
     infoActive: false,
     appearHome: true,
-    right: true 
+    right: true
   }
 
   toggleInfoDrawer = () => {
     this.setState({
       infoActive: !this.state.infoActive,
-    }) 
+    })
   }
 
   showInfoDrawer = () => {
     this.setState({
       infoActive: false,
-    }) 
+    })
   }
 
   left = () => {
     this.setState({
       right: false,
-    }) 
-  } 
+    })
+  }
 
   right = () => {
     this.setState({
       right: true,
-    }) 
+    })
   }
 
   toggleAppear = () => {
     this.setState({
       appearHome: !this.state.appearHome,
-    }) 
+    })
   }
 
   incrementItem = () => {
       if ( this.state.id + 1 < this.props.data.length) {
         this.setState({ id: this.state.id + 1 });
       } else {
-        this.setState({ id: 0 }); 
+        this.setState({ id: 0 });
       }
   }
 
@@ -71,21 +71,21 @@ class App extends Component {
         this.setState({ id: this.state.id - 1 });
       } else {
         this.setState({ id: this.props.data.length - 1 });
-      }    
+      }
   }
 
   wrapperFunctionPrev = () => {
     this.showInfoDrawer();
     () => this.state.toggleAppear();
     this.decrementItem();
-    this.left(); 
+    this.left();
   }
 
   wrapperFunctionNext = () => {
     this.showInfoDrawer();
     () => this.state.toggleAppear();
     this.incrementItem();
-    this.right(); 
+    this.right();
   }
 
 
@@ -107,63 +107,40 @@ class App extends Component {
       let mycst_feat_img = obj.acf.cst_feat_img.sizes.large;
       let mypostTitle = obj.post_title;
     });*/
- 
 
-/* 
+
+/*
      const allWorks = data.map(( obj =>
       <Route path={"/" + obj.ID} component={"a" + obj.post_name} >
-        <div style={styleWork}> 
-            <Work 
-                cst_feat_img={ obj.acf.cst_feat_img.sizes.large } 
-                postTitle={ obj.post_title } 
+        <div style={styleWork}>
+            <Work
+                cst_feat_img={ obj.acf.cst_feat_img.sizes.large }
+                postTitle={ obj.post_title }
             />
         </div>
       </Route>
       )
-    ); 
+    );
 
  */
- 
- 
 
-        let allWorks = data
-
-        .map(( obj => {
-          return   <Route key={obj.ID} path={"/" + obj.ID} component={"J" + obj.post_name} >
-            <div style={styleWork}> 
-              <Work 
-                cst_feat_img={ obj.acf.cst_feat_img.sizes.large } 
-                postTitle={ obj.post_title } 
-              />
-            </div>
-          </Route> 
-
-          return (
-            {allWorks}  
-          );
- 
-        } ) );
-
- 
- 
- 
 
 /*    const RedView = () => (
         <div style={styleWork}>
-          <Work 
-              cst_feat_img={ this.props.data[0].acf.cst_feat_img.sizes.large } 
-              postTitle={ this.props.data[0].post_title } 
+          <Work
+              cst_feat_img={ this.props.data[0].acf.cst_feat_img.sizes.large }
+              postTitle={ this.props.data[0].post_title }
           />
         </div>
       );
       const BlueView = () => (
         <div style={styleWork}>
-          <Work 
-              cst_feat_img={ this.props.data[1].acf.cst_feat_img.sizes.large } 
-              postTitle={ this.props.data[1].post_title } 
+          <Work
+              cst_feat_img={ this.props.data[1].acf.cst_feat_img.sizes.large }
+              postTitle={ this.props.data[1].post_title }
           />
         </div>
-      ); 
+      );
 */
       return (
         <Router>
@@ -171,31 +148,27 @@ class App extends Component {
           <div>
 
             <div>
-              <Link to="/red">Red</Link> 
+              <Link to="/red">Red</Link>
               <Link to="/blue">Blue</Link> |
-              <Link to="/green">Green</Link> 
+              <Link to="/green">Green</Link>
               <Link to="/yellow">Yellow</Link>
             </div>
-   
+
             <SwipeableRoutes replace>
-            { allWorks } 
-{/*              <Route path="/red" component={RedView} />
-              <Route path="/blue" component={BlueView} />
-              <Route path="/green" component={GreenView} />
-              <Route path="/yellow" component={YellowView} />*/}
+              {data.map( work =>   <Route key={ID} path={"/" + ID} component={()=><Work {...work}/>} />}
             </SwipeableRoutes>
 
- 
+
 
             <Drawer
               infoActive={ this.state.infoActive }
               description={ this.props.data[1].acf.project_description }
-            /> 
-              
-            <div className="jag-info-btn">   
+            />
+
+            <div className="jag-info-btn">
                 <div className="jag-info-btn__txt"
                    onClick={ this.toggleInfoDrawer }> Info
-                </div>   
+                </div>
             </div>
 
 
@@ -217,17 +190,17 @@ export default App;
                     <div className="slide content-area ">
                         <div className="site-main scene_element2 scene_element--fadein2">
 
-                          <Work 
-                              cst_feat_img={cst_feat_img} 
-                              postTitle={name} 
+                          <Work
+                              cst_feat_img={cst_feat_img}
+                              postTitle={name}
                               postID={ID}
-                              right={ this.state.right }    
-                              infoActive={ this.state.infoActive } 
+                              right={ this.state.right }
+                              infoActive={ this.state.infoActive }
                           />
                         </div>
                     </div>
                 </div>
-            </div> 
+            </div>
 
          </div>
 

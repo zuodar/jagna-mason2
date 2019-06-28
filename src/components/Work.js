@@ -1,6 +1,8 @@
-import React, { Component } from 'react';
-// import Drawer from './Drawer';
-import { CSSTransition, TransitionGroup } from "react-transition-group";
+import React, { Component, useState } from 'react';
+import Drawer from './Drawer'
+import { withRouter } from 'react-router'
+import { Link } from 'react-router-dom'
+import { routeKey } from '../index'
 
 const divStyle = {
 	left: '0',
@@ -8,50 +10,20 @@ const divStyle = {
 	fontSize: '24px'
 };
 
-const Work = ( props ) => {
-
-
-
-	let  slideClass = null;
-	if ( props.right == true ) { 
-         slideClass  = ("slideright");
-  	} else   { 
-         slideClass  = ("slideleft");
-  	}
-
+const Work = ( { acf : {cst_feat_img, project_description}, postTitle, prev, next } ) => {
+	const [drawerOpened, setDrawerOpened] = useState(false)
 	return (
- 
+		<div style={{position:'relative'}}>
+			<Link to={'/'}>Home</Link>
+			{prev ? <Link to={prev}>Prev</Link> : undefined}
+			{next ? <Link to={next}>Next</Link>: undefined}
+			<Drawer drawerOpened={drawerOpened} description={project_description}/>
+			<button onClick={()=>setDrawerOpened(!drawerOpened)}>Toggle Drawer</button>
+			<h1> {cst_feat_img.title}</h1>
 
-            <TransitionGroup className="card-container">
-                <CSSTransition
-                    key={ props.postID }
-                    timeout={ 1000 }
-                    classNames={ slideClass } >
+			<img src = {cst_feat_img.sizes.large} />
 
-			    	<div className="card "> 
-
-			 			<div className="jag-single-title"> { props.postTitle} </div> 
-
-				    	<div className="jag-image jag-img jag-image1 jag-img-active  "> 
-					    	<div className="post-thumbnail">
-						    	<img className="attachment-post-thumbnail size-post-thumbnail wp-post-image"  
-						    	src={ props.cst_feat_img}
-						    	/> 
-					    	</div> 
-				    	</div>
- 
-
-
-
-
-
-			    	</div>
-
-
-                </CSSTransition>
-            </TransitionGroup>
-
-
+		</div>
 
 	)
 }

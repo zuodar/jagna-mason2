@@ -1,48 +1,50 @@
 import 'antd/dist/antd.css'
 import './styles.css'
 import React from 'react'
-import { render } from 'react-dom' 
- 
+import { render } from 'react-dom'
+
 import {BrowserRouter as Router, Route, Switch, Link } from 'react-router-dom';
 
 import Main from './components/Main';
-import Works from './components/Works';
 import NotFound from './components/NotFound';
 import Fetch from './components/Fetch';
-import Swiper from './components/Swiper';
-import Swipeable from './components/Swipeable';
-import Test from './components/Test';
-import Test2 from './components/Test2';
-import Resize from './components/Resize';
+import SwipeableRoutes from 'react-swipeable-routes'
+import Work from './components/Work'
 
 const jsonUrl = 'http://rawsaw.co/jagna1984/wp-json/sections/v1/post'
 
-// class App extends Component {
-const App = () => {
+export const routeKey = 'post_name';
+
+
+const prev = (data, item) => {
+  const currentIndex = data.findIndex(i=>i[routeKey] === item[routeKey])
+  if (data[currentIndex -1]) return data[currentIndex -1][routeKey]
+  return false
+}
+const next = (data, item) => {
+  const currentIndex = data.findIndex(i=>i[routeKey] === item[routeKey])
+  if (data[currentIndex +1]) return data[currentIndex +1][routeKey]
+  return false
+}
+
+
+const App = ({data}) => {
+
   return (
-    <Router> 
-        <Switch> 
+    <Router>
+      <Switch>
+        <Route path="/" exact component={() => <Main data={data}/>} />
+        <SwipeableRoutes replace>
 
-          <Route path="/main" exact component={() => <Fetch component={Main} url={jsonUrl}/>} />
+          {data.map(
+            work => <Route key={work.ID} path={'/'+work[routeKey]} component={()=><Work {...work} next={next(data,work)} prev={prev(data,work)} />} />)}
+        </SwipeableRoutes>
+        <Route component={NotFound} />
 
-          {/*<Fetch url={ jsonUrl } component={() => <Route path="/main" exact component={Main} /> } /> */}
-          {/*<Route path="/main" exact component={() => <Fetch component={Main} url={jsonUrl}/>} /> */}
+      </Switch>
 
-          <Route path="/" exact component={() => <Fetch component={Swipeable} url={ jsonUrl }/>} />
-          <Route path="/test" exact component={Test} />
-          <Route path="/test2" exact component={Test2} />
-          <Route path="/swiper" exact component={Swiper} />
-          <Route path="/resize" exact component={Resize} />
-          <Route
-            path="/works/:id"
-            component={
-              ({match})=><Fetch match={match} component={Works} url={ jsonUrl }/>} />
-          <Route component={NotFound} />
-
-        </Switch>
-      
     </Router>
   )
 }
 
-render(<App />, document.getElementById('root'))
+render(<Fetch component={App} url={jsonUrl}/>, document.getElementById('root'))

@@ -1,15 +1,11 @@
-import Radium from 'radium';
 import React, { PureComponent  } from 'react'
-import { render } from 'react-dom';
 import 'antd/dist/antd.css'
 import '../styles.css'
-import lodash from 'lodash'
-import { Icon } from 'antd' 
+import { Icon } from 'antd'
 import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
-import ReactResizeDetector from 'react-resize-detector';
-
- 
+import { Link } from 'react-router-dom'
+import {routeKey} from '../index';
 const cellStyle = {
   position: 'relative',
   backgroundSize: 'cover',
@@ -24,7 +20,7 @@ const cellStyle = {
   transition: 'box-shadow 0.5s',
   fontSize: '10px',
   lineHeight: '10px',
-  border: '1px solid red', 
+  border: '1px solid red',
 }
 
 const defaultstyle = {
@@ -38,12 +34,9 @@ const defaultstyle = {
   fontFamily: 'jagnas',
   textTransform: 'uppercase',
   letterSpacing: '-2.5px',
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
   marginTop: '0px',
   top: '0%',
-  left: '0%', 
+  left: '0%',
   bottom: '0',
   right: '0',
   mixBlendMode: 'darken',
@@ -52,15 +45,15 @@ const defaultstyle = {
   color: '#EF0000',
   opacity: '0.0',
   whiteSpace: 'nowrap',
- 
- }
+
+}
 
 
 //acf.cst_feat_img.sizes.large
 
-const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, maximized }) => (
-
-
+const Cell = props => {
+  const { ID, toggle, post_title, thumbnail,  project_description, css, maximized } = props;
+  return <Link to={props[routeKey]}>
     <div
       className="cell"
       style={{ backgroundImage: css, cursor: !maximized ? 'pointer' : 'auto' }}
@@ -78,8 +71,8 @@ const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, ma
           </Slug>
         </div>
       </Fade>
- 
- 
+
+
 
       <Fade
         show={!maximized}
@@ -93,8 +86,8 @@ const Cell = ({ ID, toggle, post_title, thumbnail,  project_description, css, ma
 
       </Fade>
     </div>
-  
-)
+  </Link>
+}
 
 
 
@@ -103,34 +96,34 @@ class App extends PureComponent  {
 
   categoryList = []
 
-  state = {  
-    columns: 5, 
+  state = {
+    columns: 5,
     margin: 40,
     szer: 0,
     responsiveFactor: 100,
-  } 
+  }
 
 
-  
-  modifyColumns = () => {  
+
+  modifyColumns = () => {
     let newColumns = 5;
     if (this.state.szer > 1400 ) {
       newColumns = 5;
       this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
     } else if (this.state.szer > 1100 && this.state.szer <= 1400) {
-      newColumns = 4; 
-      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
+      newColumns = 4;
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
     } else if (this.state.szer > 800 && this.state.szer <= 1100) {
       newColumns = 3;
-      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
     } else if (this.state.szer > 400 && this.state.szer <= 800) {
       newColumns = 2;
-      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
     } else if (this.state.szer > 1 && this.state.szer <= 400) {
       newColumns = 1;
-      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns }); 
-    }  
-      this.setState({ columns: newColumns });
+      this.setState({ responsiveFactor: (this.state.szer - this.state.margin*(newColumns+1))/newColumns });
+    }
+    this.setState({ columns: newColumns });
   }
 
 
@@ -138,20 +131,20 @@ class App extends PureComponent  {
 
 
   /*  componentDidMount(){
-    this.modifyColumns()
+  this.modifyColumns()
   }*/
 
   componentWillMount(){
     this.categoryList = this.props.data.reduce((sum, current) => {
-        if(current.acf.category) {
-          current.acf.category.forEach(cat => {
-            sum.add(cat)
-          })
-        }
+      if(current.acf.category) {
+        current.acf.category.forEach(cat => {
+          sum.add(cat)
+        })
+      }
       return sum;
     }, new Set())
   }
-  
+
   //shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
 
   toggleFilter = (category) =>
@@ -171,29 +164,29 @@ class App extends PureComponent  {
   render() {
     const { data } = this.props;
     const filteredWorks = data/*.filter(
-      item => (this.state.categoryList.length > 0)
-        ? this.state.categoryList.filter(c => item.category.includes(c)).length
-        : true
+    item => (this.state.categoryList.length > 0)
+    ? this.state.categoryList.filter(c => item.category.includes(c)).length
+    : true
     )*/
- 
- 
-  // console.log(this.state.categoryList)
-  // console.log( 'data.acf.cst_feat_img.height', this.props.data[0].acf.cst_feat_img.sizes["large-height"] ) 
-  
 
-    return ( 
+
+    // console.log(this.state.categoryList)
+    // console.log( 'data.acf.cst_feat_img.height', this.props.data[0].acf.cst_feat_img.sizes["large-height"] )
+
+
+    return (
 
       <div className="main">
 
-        <ReactResizeDetector 
-          handleWidth
-          render={({ width }) => (
-            <div>
-              { this.setState({ szer: width }) }
-              { this.modifyColumns() }
-            </div>
-          )}
-        />
+        {/*<ReactResizeDetector */}
+        {/*  handleWidth*/}
+        {/*  render={({ width }) => (*/}
+        {/*    <div>*/}
+        {/*      { this.setState({ szer: width }) }*/}
+        {/*      { this.modifyColumns() }*/}
+        {/*    </div>*/}
+        {/*  )}*/}
+        {/*/>*/}
 
         <Header
           {...this.state}
@@ -208,10 +201,10 @@ class App extends PureComponent  {
           // Key accessor, instructs grid on how to fet individual keys from the data set
           keys={ d => d.ID }
           // Can be a fixed value or an individual data accessor
-          // heights={this.state.height ? d => d.height : 300} 
-          //heights={d => d.height} 
-          heights={ d => (d.acf.cst_feat_img.sizes["large-height"])/(d.acf.cst_feat_img.sizes["large-width"])*this.state.responsiveFactor } 
-          // Keep image proportions 
+          // heights={this.state.height ? d => d.height : 300}
+          //heights={d => d.height}
+          heights={ d => (d.acf.cst_feat_img.sizes["large-height"])/(d.acf.cst_feat_img.sizes["large-width"])*this.state.responsiveFactor }
+          // Keep image proportions
 
           // Number of columns
           columns={this.state.columns}
