@@ -24,8 +24,9 @@ const prev = (data, item) => {
 const next = (data, item) => {
   const currentIndex = data.findIndex(i=>i[routeKey] === item[routeKey])
   if (data[currentIndex +1]) return data[currentIndex +1][routeKey]
-  return false
+  return false;
 }
+
 
 
 const App = ({data}) => {
@@ -35,9 +36,14 @@ const App = ({data}) => {
       <Switch>
         <Route path="/" exact component={() => <Main data={data}/>} />
         <SwipeableRoutes replace>
-
-          {data.map(
-            work => <Route key={work.ID} path={'/'+work[routeKey]} component={()=><Work {...work} next={next(data,work)} prev={prev(data,work)} />} />)}
+          {data.map( work =>
+            <Route
+              key={work.ID}
+              path={'/'+work[routeKey]}
+              component={()=><Work {...work}
+              next={next(data,work)}
+              prev={prev(data,work)} />}
+            />)}
         </SwipeableRoutes>
         <Route component={NotFound} />
 

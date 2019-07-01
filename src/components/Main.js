@@ -6,6 +6,8 @@ import Header from '../Header'
 import { Grid, Slug, Fade } from 'mauerwerk'
 import { Link } from 'react-router-dom'
 import {routeKey} from '../index';
+import ReactResizeDetector from 'react-resize-detector';
+ 
 const cellStyle = {
   position: 'relative',
   backgroundSize: 'cover',
@@ -20,7 +22,7 @@ const cellStyle = {
   transition: 'box-shadow 0.5s',
   fontSize: '10px',
   lineHeight: '10px',
-  border: '1px solid red',
+  border: '1px solid red', 
 }
 
 const defaultstyle = {
@@ -34,9 +36,12 @@ const defaultstyle = {
   fontFamily: 'jagnas',
   textTransform: 'uppercase',
   letterSpacing: '-2.5px',
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'center',
   marginTop: '0px',
   top: '0%',
-  left: '0%',
+  left: '0%', 
   bottom: '0',
   right: '0',
   mixBlendMode: 'darken',
@@ -45,35 +50,21 @@ const defaultstyle = {
   color: '#EF0000',
   opacity: '0.0',
   whiteSpace: 'nowrap',
-
-}
-
+ 
+ }
 
 //acf.cst_feat_img.sizes.large
 
 const Cell = props => {
   const { ID, toggle, post_title, thumbnail,  project_description, css, maximized } = props;
   return <Link to={props[routeKey]}>
-    <div
-      className="cell"
-      style={{ backgroundImage: css, cursor: !maximized ? 'pointer' : 'auto' }}
-      // onClick={!maximized ? toggle : undefined}
-    >
+    <div className="cell" >
       <Fade show={maximized} delay={maximized ? 400 : 0}>
         <div className="details">
-          <Slug delay={600}>
-            <div className="circle" style={{ background: css }} />
-            <div className="close">
-              <Icon type="close" style={{ cursor: 'pointer' }} onClick={toggle} />
-            </div>
             <h1>{post_title}</h1>
             <p>{project_description}</p>
-          </Slug>
         </div>
       </Fade>
-
-
-
       <Fade
         show={!maximized}
         from={{ opacity: 0, transform: 'translate3d(0,140px,0)' }}
@@ -126,14 +117,6 @@ class App extends PureComponent  {
     this.setState({ columns: newColumns });
   }
 
-
-
-
-
-  /*  componentDidMount(){
-  this.modifyColumns()
-  }*/
-
   componentWillMount(){
     this.categoryList = this.props.data.reduce((sum, current) => {
       if(current.acf.category) {
@@ -145,7 +128,6 @@ class App extends PureComponent  {
     }, new Set())
   }
 
-  //shuffle = () => this.setState(state => ({ data: lodash.shuffle(state.data) }))
 
   toggleFilter = (category) =>
     () => {
@@ -178,15 +160,15 @@ class App extends PureComponent  {
 
       <div className="main">
 
-        {/*<ReactResizeDetector */}
-        {/*  handleWidth*/}
-        {/*  render={({ width }) => (*/}
-        {/*    <div>*/}
-        {/*      { this.setState({ szer: width }) }*/}
-        {/*      { this.modifyColumns() }*/}
-        {/*    </div>*/}
-        {/*  )}*/}
-        {/*/>*/}
+        <ReactResizeDetector 
+          handleWidth
+          render={({ width }) => (
+            <div>
+              { this.setState({ szer: width }) }
+              { this.modifyColumns() }
+            </div>
+          )}
+        />
 
         <Header
           {...this.state}
@@ -227,8 +209,3 @@ class App extends PureComponent  {
 }
 
 export default App;
-
-
-
-
-
